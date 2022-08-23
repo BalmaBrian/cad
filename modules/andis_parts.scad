@@ -21,7 +21,7 @@ module n0_body()
     point_g = [ 0, 7.5, 0.13 ];
     point_h = [ 21, -2.3, 2 ];
 
-    // Creating the no_0_primitive object with a rotation on the extrude
+    // Creating the n0_body object with a rotation on the extrude
     // Object is placed on the +X -Y +Z plane
     rotate([ 90, 0, 0 ]) linear_extrude(height = 48)
     {
@@ -41,7 +41,7 @@ module n0_wall()
     point_h = [ 0, 7.5, 0.13 ];
     point_i = [ 21, -2.3, 2 ];
 
-    // Creating the no_0_primitive object with a rotation on the extrude
+    // Creating the n0_wall object with a rotation on the extrude
     // Object is placed on the +X -Y +Z plane
     rotate([ 90, 0, 0 ]) linear_extrude(height = 1)
     {
