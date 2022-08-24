@@ -1,3 +1,3 @@
 include <../modules/andis_parts.scad>
 
-% no_0();
+render() no_0();
