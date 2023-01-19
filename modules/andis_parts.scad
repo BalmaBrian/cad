@@ -13,10 +13,14 @@ module no_0()
             n0_clip_prisim();
         }
         n0_body_cutter();
+        translate([0,-50,0]) tooth_curve();
         for (i = [1:10])
         {
             translate([ 0, i * -4.15, 0 ]) n0_tooth_cutter();
+            translate([ 0, i * -4.15 + -2, 0 ]) tooth_curve();
         }
+        tooth_curve();
+        magnet_cut();
     }
 }
 
@@ -127,4 +131,13 @@ module n0_clip_prisim()
         }
         translate([ 53, -16.25, 3 ]) rotate([ 90, 0, 0 ]) cylinder(h = 14, r = 2, $fn = 64);
     }
+}
+
+module magnet_cut()
+{
+    translate([ 34, -24, 1]) cylinder(h = 3, r = 9, $fn = 64);
+}
+module tooth_curve()
+{
+    linear_extrude(height = 10) polygon(polyRound([ [0,-1,0], [0,3,0], [0.35,2.35,1], [15,2,0], [15,0,0], [0.5,-0.35,1]]));
 }
