@@ -56,7 +56,7 @@ module qorvo_lid_bottom() {
 
 module qorvo_lid_top() {
     TOLERANCE = 0;
-    dimensions_vector = [44.2, 62.9, 5];
+    dimensions_vector = [44.2, 62.9, 6];
     tolerance_vector = [TOLERANCE, TOLERANCE, TOLERANCE];
     dimensions = dimensions_vector + tolerance_vector;
     cube(dimensions);
@@ -64,7 +64,7 @@ module qorvo_lid_top() {
 
 module qorvo_lid_cut() {
   TOLERANCE = 0.5;
-    dimensions_vector = [4.8, 31, 5];
+    dimensions_vector = [4.8, 31, 6];
     tolerance_vector = [TOLERANCE, TOLERANCE, TOLERANCE];
     dimensions = dimensions_vector + tolerance_vector;
     cube(dimensions);
