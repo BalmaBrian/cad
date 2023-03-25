@@ -17,10 +17,10 @@ module shroud()
       translate([25, 70, 240]) cube(MI50_SILUETTE);
       translate([0, 0, 0]) cube(FAN_SILUETTE);
     }
-    translate([1, 1, 0]) hull() 
+    translate([3, 3, 0]) hull() 
     {
-      translate([25, 70, 240]) cube(MI50_SILUETTE - [2, 2, 0]);
-      translate([0, 0, 0]) cube(FAN_SILUETTE - [2, 2, 0]);
+      translate([25, 70, 240]) cube(MI50_SILUETTE - [6, 6, 0]);
+      translate([0, 0, 0]) cube(FAN_SILUETTE - [6, 6, 0]);
     }
   }
 }
