@@ -1,55 +1,105 @@
 include <../Round-Anything/polyround.scad>
 
-module adapters() {
-  Two_140mm_Fan_Adapter();
-  translate([150, 0, 0]) MI50_Adapter();
-}
+SILHOUTTE_140_MM_FAN = [140, 140, 0];
+HOLE_DISTANCE_140_MM_FAN = 124.5;
+HOLE_DIAMITER_140_MM_FAN = 4.5;
+FAN_HOLE_DIAMITER_140_MM_FAN = 134.2;
+ADAPTER_HEIGHT_140_MM_FAN = 3;
 
-module shroud()
+
+module shroud() 
 {
-  FAN_SILUETTE = [140, 280, 0.1];
-  MI50_SILUETTE = [94.25, 25, 0.1];
-  // extrude from MI50_SILUETTE to FAN_SILUETTE 
-  difference()
+  bottom_fan_shroud();
+  top_fan_shroud();
+}
+
+module fan_adapter() 
+{
+  difference() 
   {
-    hull() 
+    cube(SILHOUTTE_140_MM_FAN + [0, 0, ADAPTER_HEIGHT_140_MM_FAN]);
+    translate([70, 70, 0]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, d = FAN_HOLE_DIAMITER_140_MM_FAN, $fn = 34);
+    translate([(140-HOLE_DISTANCE_140_MM_FAN)/2, (140-HOLE_DISTANCE_140_MM_FAN)/2, 0]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, d = HOLE_DIAMITER_140_MM_FAN, $fn = 34);
+    translate([(140-HOLE_DISTANCE_140_MM_FAN)/2, (140-HOLE_DISTANCE_140_MM_FAN)/2+HOLE_DISTANCE_140_MM_FAN, 0]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, d = HOLE_DIAMITER_140_MM_FAN, $fn = 34);
+    translate([(140-HOLE_DISTANCE_140_MM_FAN)/2+HOLE_DISTANCE_140_MM_FAN, (140-HOLE_DISTANCE_140_MM_FAN)/2, 0]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, d = HOLE_DIAMITER_140_MM_FAN, $fn = 34);
+    translate([(140-HOLE_DISTANCE_140_MM_FAN)/2+HOLE_DISTANCE_140_MM_FAN, (140-HOLE_DISTANCE_140_MM_FAN)/2+HOLE_DISTANCE_140_MM_FAN, 0]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, d = HOLE_DIAMITER_140_MM_FAN, $fn = 34);
+  }
+}
+
+module bottom_fan_shroud()
+{
+  union()
+  {
+    fan_adapter();
+    union()
     {
-      translate([25, 70, 240]) cube(MI50_SILUETTE);
-      translate([0, 0, 0]) cube(FAN_SILUETTE);
-    }
-    translate([3, 3, 0]) hull() 
-    {
-      translate([25, 70, 240]) cube(MI50_SILUETTE - [6, 6, 0]);
-      translate([0, 0, 0]) cube(FAN_SILUETTE - [6, 6, 0]);
+      difference() 
+      {
+        bottom_fan_wall();
+        bottom_fan_cutout();
+      }
+      difference() 
+      {
+        translate([70-(20+140-FAN_HOLE_DIAMITER_140_MM_FAN), 110-(20+140-FAN_HOLE_DIAMITER_140_MM_FAN), 140]) cube([(20+140-FAN_HOLE_DIAMITER_140_MM_FAN)*2, (20+140-FAN_HOLE_DIAMITER_140_MM_FAN)*2, ADAPTER_HEIGHT_140_MM_FAN]);
+        translate([70, 110, 140]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, r = 20+140-FAN_HOLE_DIAMITER_140_MM_FAN, $fn = 34);
+      }
     }
   }
 }
 
-module Two_140mm_Fan_Adapter() {
-  WALL = 6;
-  FAN_SILUETTE = [140, 280, 10];
-  difference() 
+module bottom_fan_wall()
+{
+  hull()
   {
-    cube(FAN_SILUETTE + [WALL, WALL, 0]);
-    translate([WALL/2, WALL/2, 0]) cube(FAN_SILUETTE);
+    translate([70, 70, 0]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, d = 140, $fn = 34);
+    translate([70, 110, 140]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, r = 20+140-FAN_HOLE_DIAMITER_140_MM_FAN, $fn = 34);
   }
 }
 
-module MI50_Adapter() {
-  WALL = 2;
-  MI50_SILUETTE = [94.25, 25, 20];
-  MI50_NOTCH_SILUETTE = [52, 11.85, 20];
-  difference() 
+module bottom_fan_cutout()
+{
+  hull()
   {
-    difference() 
+    translate([70, 70, 0]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, d = FAN_HOLE_DIAMITER_140_MM_FAN, $fn = 34);
+    translate([70, 110, 140]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, r = 20, $fn = 34);
+  }
+}
+
+module top_fan_shroud()
+{
+  union() 
+  {
+    translate([0, 140, 0]) fan_adapter();
+    union()
     {
-      cube(MI50_SILUETTE);
-      translate([0, 13.15, 0]) cube(MI50_NOTCH_SILUETTE);
+      difference() 
+      {
+        top_fan_wall();
+        top_fan_cutout();
+      }
+      translate([0, 140, 0]) difference()
+      {
+        translate([70-(20+140-FAN_HOLE_DIAMITER_140_MM_FAN), 30-(20+140-FAN_HOLE_DIAMITER_140_MM_FAN), 140]) cube([(20+140-FAN_HOLE_DIAMITER_140_MM_FAN)*2, (20+140-FAN_HOLE_DIAMITER_140_MM_FAN)*2, ADAPTER_HEIGHT_140_MM_FAN]);
+        translate([70, 30, 140]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, r = 20+140-FAN_HOLE_DIAMITER_140_MM_FAN, $fn = 34);
+      }
     }
-    translate([WALL/2, WALL/2, 0]) difference() 
-    {
-      cube(MI50_SILUETTE - [WALL, WALL, 0]);
-      translate([0, 13.15, 0] + [0, -WALL, 0]) cube(MI50_NOTCH_SILUETTE);
-    }
+  }
+}
+
+module top_fan_wall()
+{
+  translate([0, 140, 0]) hull()
+  {
+    translate([70, 70, 0]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, d = 140, $fn = 34);
+    translate([70, 30, 140]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, r = 20+140-FAN_HOLE_DIAMITER_140_MM_FAN, $fn = 34);
+  }
+}
+
+module top_fan_cutout()
+{
+  translate([0, 140, 0]) hull()
+  {
+    translate([70, 70, 0]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, d = FAN_HOLE_DIAMITER_140_MM_FAN, $fn = 34);
+    translate([70, 30, 140]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, r = 20, $fn = 34);
   }
 }
