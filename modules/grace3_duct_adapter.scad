@@ -127,7 +127,7 @@ module MI50_shroud()
         translate([70-(20+140-FAN_HOLE_DIAMITER_140_MM_FAN)+1.5, 70+14.3+1.5, 140+ADAPTER_HEIGHT_140_MM_FAN+3]) cube([51.6-3, 111.5-3, ADAPTER_HEIGHT_140_MM_FAN]);
         translate([71.5-30+1.5, 68.5+1.5, 240-3]) cube([68.5-3, 30-3, ADAPTER_HEIGHT_140_MM_FAN]);
       }
-      translate([61, 90, 140+ADAPTER_HEIGHT_140_MM_FAN+82]) cube([47, 20, 20]);
+      translate([59.5, 90, 140+ADAPTER_HEIGHT_140_MM_FAN+82]) cube([47, 20, 20]);
     }
   } 
 }
