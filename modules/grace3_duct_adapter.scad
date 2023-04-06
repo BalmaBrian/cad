@@ -133,7 +133,7 @@ module MI50_shroud()
 {
   union()
   {
-    difference()
+    translate([34.3,22.5,0]) difference()
     {
       translate([70-(20+140-FAN_HOLE_DIAMITER_140_MM_FAN), 70+14.3, 140+ADAPTER_HEIGHT_140_MM_FAN]) fan_shroud_adapter();
       translate([70, 30+140, 140+ADAPTER_HEIGHT_140_MM_FAN]) cylinder(h = ADAPTER_HEIGHT_140_MM_FAN, r = 20, $fn = 34);
@@ -143,12 +143,12 @@ module MI50_shroud()
     {
       hull()
       {
-        translate([70-(20+140-FAN_HOLE_DIAMITER_140_MM_FAN), 70+14.3, 140+ADAPTER_HEIGHT_140_MM_FAN+3]) cube([51.6, 111.5, ADAPTER_HEIGHT_140_MM_FAN]);
+        translate([34.3,22.5,0]) translate([70-(20+140-FAN_HOLE_DIAMITER_140_MM_FAN), 70+14.3, 140+ADAPTER_HEIGHT_140_MM_FAN+3]) cube([51.6, 111.5, ADAPTER_HEIGHT_140_MM_FAN]);
         translate([71.5-30, 96.75, 235-33]) cube([96.75, 30, ADAPTER_HEIGHT_140_MM_FAN]);
       }
       hull()
       {
-        translate([70-(20+140-FAN_HOLE_DIAMITER_140_MM_FAN)+1.5, 70+14.3+1.5, 140+ADAPTER_HEIGHT_140_MM_FAN+3]) cube([51.6-3, 111.5-3, ADAPTER_HEIGHT_140_MM_FAN]);
+        translate([34.3,22.5,0]) translate([70-(20+140-FAN_HOLE_DIAMITER_140_MM_FAN)+1.5, 70+14.3+1.5, 140+ADAPTER_HEIGHT_140_MM_FAN+3]) cube([51.6-3, 111.5-3, ADAPTER_HEIGHT_140_MM_FAN]);
         translate([71.5-30+1.5, 96.75+1.5, 235-33]) cube([96.75-3, 30-3, ADAPTER_HEIGHT_140_MM_FAN]);
       }
       // translate([59.5, 90, 140+ADAPTER_HEIGHT_140_MM_FAN+82]) cube([47, 20, 20]);
@@ -156,9 +156,9 @@ module MI50_shroud()
     }
     difference() 
     {
-      translate([71.5-30, 96.75, 235-33]) cube([96.75, 30, 30]);
-      translate([71.5-30+1.5, 96.75+1.5, 235-33]) cube([96.75-3, 30-3, 30]);
-      translate([71.5-30+42, 96.75+1.5, 235-33+15.5]) cube([53,33,14.5]);
+      translate([71.5-30, 96.75, 235-33]) cube([96.75, 30, 35.8]);
+      translate([71.5-30+1.5, 96.75+1.5, 235-33]) cube([96.75-3, 30-3, 36]);
+      translate([71.5-30+42, 96.75+1.5, 235-33]) cube([53,33,36]);
     }
   }
 }
